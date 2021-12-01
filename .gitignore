@@ -3,3 +3,14 @@
 
 # Ada Library Information
 *.ali
+
+# some repos and files
+day/
+exec/day*
+obj/*.adb
+obj/*.ads
+obj/*.ali
+obj/*.o
+obj/*.stdout
+obj/*.stderr
+obj/*.bexch
