@@ -19,4 +19,4 @@ the input puzzle.
 
 If you want to run day 1, use the command:
 
-`path/to/advent_of_code_2020/exec/day01 /path/to/input.txt`
+`path/to/advent_of_code_2021/exec/day01 /path/to/input.txt`
