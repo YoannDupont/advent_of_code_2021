@@ -16,7 +16,7 @@ procedure Day02 is
     end record;
 
     type Course is array(Positive range <>) of Instruction;
-    Emtpy_Course : constant Course(1 .. 0) := (others => <>);
+    Empty_Course : constant Course(1 .. 0) := (others => <>);
 
     type State is record
         horizontal, depth, aim : Integer;
@@ -58,7 +58,7 @@ procedure Day02 is
         Range_Type => Positive,
         Value_Type => Instruction,
         Array_Type => Course,
-        Emtpy_Array => Emtpy_Course,
+        Empty_Array => Empty_Course,
         Get => Get
     );
 

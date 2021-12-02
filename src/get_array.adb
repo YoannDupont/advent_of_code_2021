@@ -10,5 +10,5 @@ function Get_Array(F : Ada.Text_IO.File_Type) return Array_Type is
         end if;
     end Get;
 begin
-    return Get(Emtpy_Array);
+    return Get(Empty_Array);
 end Get_Array;
