@@ -6,6 +6,17 @@ daily, but they will come sooner or later.
 Trying to use a couple Ada 202X constructs, at least those currently available,
 thinking mainly about `@`.
 
+# Solutions "philosophy"
+
+More like guidelines I'll try to follow, but will break if it makes sense:
+
+- code should be as much as possible self-contained (might abstract away input reading in some cases)
+- use as much terminology from the puzzle wording as possible in source code
+- custom types, lots of them
+- `renames` over `use`
+    - `use type` is good for making operators visibles
+- names `part_1` and `part_2` should preferably be present in the code, as variables or methods
+
 # Build
 
 You can build the project using the command:

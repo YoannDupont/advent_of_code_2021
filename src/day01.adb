@@ -36,10 +36,12 @@ procedure Day01 is
     function Count_Larger(input : Natural_Array; window_size : Positive) return Natural is
         count : Natural := 0;
         previous : Natural := Sum(input(input'First .. input'First + window_size - 1));
-        current : Natural;
+        -- prevents computing sum each time, just subtract previous element and add the last
+        current : Natural := previous;
     begin
         for I in input'First+1 .. input'Last - window_size + 1 loop
-            current := Sum(input(I .. I + window_size - 1));
+            -- current := Sum(input(I .. I + window_size - 1));
+            current := @ - input(I-1) + input(I + window_size - 1);
             if previous < current then
                 count := @ + 1;
             end if;
@@ -66,6 +68,7 @@ begin
 
     TIO.Put_Line("How many measurements are larger than the previous measurement?");
     TIO.Put_Line(part_1'Img);
+
     TIO.New_Line;
     TIO.Put_Line("Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?");
     TIO.Put_Line(part_2'Img);
