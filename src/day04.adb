@@ -13,8 +13,9 @@ procedure Day04 is
     package ASF renames Ada.Strings.Fixed;
 
     subtype Bingo_Range is Positive range 1 .. 5;
+    subtype Mask_Type is Natural range 0 .. 1;
     type Bingo_Board is array(Bingo_Range, Bingo_Range) of Natural;
-    type Bingo_Mask is array(Bingo_Range, Bingo_Range) of Natural;
+    type Bingo_Mask is array(Bingo_Range, Bingo_Range) of Mask_Type;
     package Bingo_Board_Vectors is new Ada.Containers.Vectors(Positive, Bingo_Board);
     subtype Bingo_Board_Vector is Bingo_Board_Vectors.Vector;
 
