@@ -11,8 +11,9 @@ thinking mainly about `@`.
 More like guidelines I'll try to follow, but will break if it makes sense:
 
 - code should be as much as possible self-contained (might abstract away input reading in some cases)
-- use as much terminology from the puzzle wording as possible in source code
+- use as much terminology from the puzzle wording as possible
 - custom types, lots of them
+- as little hard coding as possible
 - `renames` over `use`
     - `use type` is good for making operators visibles
 - names `part_1` and `part_2` should preferably be present in the code, as variables or methods

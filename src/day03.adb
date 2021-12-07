@@ -143,7 +143,7 @@ begin
     TIO.Put_Line(Natural'Image(gamma_rate * epsilon_rate));
 
     TIO.New_Line;
-    TIO.Put_Line("This is a placeholder for part 2.");
+    TIO.Put_Line("What is the life support rating of the submarine? (Be sure to represent your answer in decimal, not binary.)");
     Part_2(input, oxygen_generator_rating, co2_scrubber_rating);
     TIO.Put_Line(Natural'Image(oxygen_generator_rating * co2_scrubber_rating));
 end Day03;
