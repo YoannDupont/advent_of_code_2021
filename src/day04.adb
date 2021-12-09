@@ -59,10 +59,22 @@ procedure Day04 is
         return subsystem;
     end Get;
 
+    function Read(filepath : String) return Bingo_Subsystem is
+        F : TIO.File_Type;
+    begin
+        TIO.Open(F, TIO.In_File, filepath);
+        declare
+            input : constant Bingo_Subsystem := Get(F);
+        begin
+            TIO.Close(F);
+            return input;
+        end;
+    end Read;
+
     function Play_Bingo(input : Bingo_Subsystem; get_first : Boolean) return Natural is
         mask : array(1 .. Natural(input.boards.Length)) of Bingo_Mask := (others => (others => (others => 1)));
-        rows_remaining : array(1 .. Natural(input.boards.Length)) of Natural_Array(Bingo_Range) := (others => (others => 5));
-        cols_remaining : array(1 .. Natural(input.boards.Length)) of Natural_Array(Bingo_Range) := (others => (others => 5));
+        rows_remaining : array(1 .. Natural(input.boards.Length)) of Natural_Array(Bingo_Range) := (others => (others => Bingo_Board'Length(2)));
+        cols_remaining : array(1 .. Natural(input.boards.Length)) of Natural_Array(Bingo_Range) := (others => (others => Bingo_Board'Length(1)));
         board : Bingo_Board;
         winning : Boolean;
         winning_number : Natural;
@@ -110,25 +122,18 @@ procedure Day04 is
         return unmarked_sum * winning_number;
     end Play_Bingo;
 
-    function Part_1(input : Bingo_Subsystem; get_first : Boolean := True) return Natural renames Play_Bingo;
-    function Part_2(input : Bingo_Subsystem; get_first : Boolean := False) return Natural renames Play_Bingo;
+    function Part_1(input : Bingo_Subsystem) return Natural is (Play_Bingo(input, get_first => True));
+    function Part_2(input : Bingo_Subsystem) return Natural is (Play_Bingo(input, get_first => False));
 
     filepath : constant String := Ada.Command_Line.Argument(1);
-    F : TIO.File_Type;
+    input : constant Bingo_Subsystem := Read(filepath);
 begin
     TIO.Put_Line("--- Day 4: Giant Squid ---");
 
-    TIO.Open(F, TIO.In_File, filepath);
-    declare
-        input : constant Bingo_Subsystem := Get(F);
-    begin
-        TIO.Close(F);
+    TIO.Put_Line("To guarantee victory against the giant squid, figure out which Bingo_Board will win first. What will your final score be if you choose that Bingo_Board?");
+    TIO.Put_Line(Part_1(input)'Img);
 
-        TIO.Put_Line("To guarantee victory against the giant squid, figure out which Bingo_Board will win first. What will your final score be if you choose that Bingo_Board?");
-        TIO.Put_Line(Part_1(input)'Img);
-
-        TIO.New_Line;
-        TIO.Put_Line("Figure out which board will win last. Once it wins, what would its final score be?");
-        TIO.Put_Line(Part_2(input)'Img);
-    end;
+    TIO.New_Line;
+    TIO.Put_Line("Figure out which board will win last. Once it wins, what would its final score be?");
+    TIO.Put_Line(Part_2(input)'Img);
 end Day04;

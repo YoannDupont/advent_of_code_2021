@@ -3,8 +3,15 @@
 Ada solutions to Advent of Code 2021. I may not be able to publish solutions
 daily, but they will come sooner or later.
 
-Trying to use a couple Ada 202X constructs, at least those currently available,
-thinking mainly about `@`.
+I'll try to use available Ada 202X constructs.
+
+## Ada202X features
+
+Here are referenced days that use Ada202X features, based on the following list: https://blog.adacore.com/ada-202x-support-in-gnat
+
+- assignment target name `@`: all of them.
+- `Indexes in array aggregate`: [day07](src/day07.adb)
+- `'Reduce`:  [day01](src/day01.adb), [day07](src/day07.adb)
 
 # Solutions "philosophy"
 

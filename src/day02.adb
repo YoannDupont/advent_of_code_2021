@@ -62,6 +62,18 @@ procedure Day02 is
         Get => Get
     );
 
+    function Read_Course(filepath : String) return Course is
+        F : TIO.File_Type;
+    begin
+        TIO.Open(F, TIO.In_File, filepath);
+        declare
+            input : constant Course := Get_Course(F);
+        begin
+            TIO.Close(F);
+            return input;
+        end;
+    end Read_Course;
+
     function Follow(input : Course; Do_Step : access procedure(current : in out State; step : Instruction)) return Natural is
         current : State := (0, 0, 0);
     begin
@@ -73,21 +85,14 @@ procedure Day02 is
     end Follow;
 
     filepath : constant String := Ada.Command_Line.Argument(1);
-    F : TIO.File_Type;
+    input : constant Course := Read_Course(filepath);
 begin
     TIO.Put_Line("--- Day 2: Dive! ---");
 
-    TIO.Open(F, TIO.In_File, filepath);
-    declare
-        input : constant Course := Get_Course(F);
-    begin
-        TIO.Close(F);
+    TIO.Put_Line("What do you get if you multiply your final horizontal position by your final depth?");
+    TIO.Put_Line(Follow(input, Part_1'Access)'Img);
 
-        TIO.Put_Line("What do you get if you multiply your final horizontal position by your final depth?");
-        TIO.Put_Line(Follow(input, Part_1'Access)'Img);
-
-        TIO.New_Line;
-        TIO.Put_Line("Using this new interpretation of the commands, what do you get if you multiply your final horizontal position by your final depth?");
-        TIO.Put_Line(Follow(input, Part_2'Access)'Img);
-    end;
+    TIO.New_Line;
+    TIO.Put_Line("Using this new interpretation of the commands, what do you get if you multiply your final horizontal position by your final depth?");
+    TIO.Put_Line(Follow(input, Part_2'Access)'Img);
 end Day02;

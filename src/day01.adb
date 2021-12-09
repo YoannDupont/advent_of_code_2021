@@ -24,14 +24,19 @@ procedure Day01 is
         return Get(Empty_Array);
     end Get;
 
-    function Sum(arr : Natural_Array) return Natural is
-        total : Natural := 0;
+    function Read(filepath : String) return Natural_Array is
+        F : TIO.File_Type;
     begin
-        for item of arr loop
-            total := @ + item;
-        end loop;
-        return total;
-    end;
+        TIO.Open(F, TIO.In_File, filepath);
+        declare
+            input : constant Natural_Array := Get(F);
+        begin
+            TIO.Close(F);
+            return input;
+        end;
+    end Read;
+
+    function Sum(arr : Natural_Array) return Natural is (arr'Reduce("+", 0));
 
     function Count_Larger(input : Natural_Array; window_size : Positive) return Natural is
         count : Natural := 0;
@@ -40,7 +45,6 @@ procedure Day01 is
         current : Natural := previous;
     begin
         for I in input'First+1 .. input'Last - window_size + 1 loop
-            -- current := Sum(input(I .. I + window_size - 1));
             current := @ - input(I-1) + input(I + window_size - 1);
             if previous < current then
                 count := @ + 1;
@@ -51,20 +55,11 @@ procedure Day01 is
     end Count_Larger;
 
     filepath : constant String := Ada.Command_Line.Argument(1);
-    F : TIO.File_Type;
-    part_1 : Natural;
-    part_2 : Natural;
+    input : constant Natural_Array := Read(filepath);
+    part_1 : constant Natural := Count_Larger(input, 1);
+    part_2 : constant Natural := Count_Larger(input, 3);
 begin
     TIO.Put_Line("--- Day 1: Sonar Sweep ---");
-
-    TIO.Open(F, TIO.In_File, filepath);
-    declare
-        input : constant Natural_Array := Get(F);
-    begin
-        TIO.Close(F);
-        part_1 := Count_Larger(input, 1);
-        part_2 := Count_Larger(input, 3);
-    end;
 
     TIO.Put_Line("How many measurements are larger than the previous measurement?");
     TIO.Put_Line(part_1'Img);
